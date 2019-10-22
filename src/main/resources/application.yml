@@ -1,0 +1,25 @@
+## Spring DATASOURCE (DataSourceAutoConfiguration & DataSourceProperties)
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/fullstack_coding_challenge?useSSL=false
+    username: haytham
+    password: toortoor
+
+  ## Hibernate Properties
+  # The SQL dialect makes Hibernate generate better SQL for the chosen database ddl-auto = update
+  ## Hibernate Logging
+  jpa:
+    hibernate:
+      ddl-auto: update
+
+  ## MULTIPART (MultipartProperties)
+  # Enable multipart uploads=true
+  servlet:
+    multipart:
+      enabled: true
+      # Threshold after which files are written to disk.
+      file-size-threshold: 2KB
+      # Max file size.
+      max-file-size: 200MB
+      # Max Request Size=215MB
+      max-request-size: 215MB

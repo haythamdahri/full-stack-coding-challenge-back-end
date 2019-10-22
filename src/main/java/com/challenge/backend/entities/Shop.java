@@ -58,7 +58,7 @@ public class Shop {
      * eager fetch to get preferred shops when getting the user from database
      * Set the property mapping
      */
-    @ManyToMany(fetch = FetchType.EAGER, mappedBy = "preferredShops")
+    @ManyToMany(mappedBy = "preferredShops", fetch = FetchType.EAGER)
     private Collection<User> users;
 
 }

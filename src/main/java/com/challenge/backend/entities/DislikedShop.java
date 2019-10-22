@@ -35,7 +35,6 @@ public class DislikedShop {
     /**
      * user property
      */
-    @Column(name = "user")
     @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
     @JoinColumn(name = "user_id")
     private User user;
@@ -44,7 +43,6 @@ public class DislikedShop {
      * shop property
      */
     @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
-    @Column(name = "shop")
     @JoinColumn(name = "shop_id")
     private Shop shop;
 
