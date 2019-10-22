@@ -3,6 +3,7 @@ package com.challenge.backend.services;
 import com.challenge.backend.dao.UserRepository;
 import com.challenge.backend.entities.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.Collection;
 
@@ -11,6 +12,7 @@ import java.util.Collection;
  * UserServiceImpl class
  * UserService interface implementor
  */
+@Service
 public class UserServiceImpl implements UserService {
 
     /***

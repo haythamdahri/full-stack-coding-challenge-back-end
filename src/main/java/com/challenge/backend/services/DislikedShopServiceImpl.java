@@ -3,6 +3,7 @@ package com.challenge.backend.services;
 import com.challenge.backend.dao.DislikedShopRepository;
 import com.challenge.backend.entities.DislikedShop;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.Collection;
 
@@ -11,6 +12,7 @@ import java.util.Collection;
  * DislikedShopServiceImpl class
  * DislikedShopService interface implementor
  */
+@Service
 public class DislikedShopServiceImpl implements DislikedShopService {
 
     /***

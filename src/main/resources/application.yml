@@ -23,3 +23,9 @@ spring:
       max-file-size: 200MB
       # Max Request Size=215MB
       max-request-size: 215MB
+
+  security:
+    user:
+      name: haytham
+      password: toortoor
+## Spring security configuration

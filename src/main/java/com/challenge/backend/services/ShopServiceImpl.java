@@ -3,6 +3,7 @@ package com.challenge.backend.services;
 import com.challenge.backend.dao.ShopRepository;
 import com.challenge.backend.entities.Shop;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.Collection;
 
@@ -11,6 +12,7 @@ import java.util.Collection;
  * ShopServiceImpl class
  * ShopService interface implementor
  */
+@Service
 public class ShopServiceImpl implements ShopService {
 
     /***
