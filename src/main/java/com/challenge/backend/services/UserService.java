@@ -15,6 +15,8 @@ public interface UserService {
 
     User getUser(Long id);
 
+    User getUser(String email);
+
     Boolean deleteUser(Long id);
 
     public Collection<User> getUsers();

@@ -5,6 +5,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.Collection;
 
 /**
@@ -20,6 +22,7 @@ import java.util.Collection;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Transactional
 public class User {
 
     /**
@@ -28,7 +31,7 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
-    private String id;
+    private Long id;
 
     /**
      * User username property
@@ -49,6 +52,24 @@ public class User {
     @Column(name = "password")
     private String password;
 
+
+    /**
+     * User enabled status property
+     */
+    @Column(name = "enabled")
+    private Boolean enabled;
+
+    /**
+     * collection of roles
+     * Annotation @ManyToMany to express relationship between User and Role
+     * a User can have multiple roles
+     * a Role can be affected to many users
+     * eager fetch to get preferred shops when getting the user from database
+     */
+    @ManyToMany
+    @JoinTable(name = "users_roles", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
+    private Collection<Role> roles;
+
     /**
      * collection of User preferred shops
      * Annotation @ManyToMany to express relationship between User and Shop
@@ -60,5 +81,16 @@ public class User {
     @JoinTable(name = "users_shops", joinColumns = {@JoinColumn(name = "user_id")}, inverseJoinColumns = {@JoinColumn(name = "shop_id")})
     private Collection<Shop> preferredShops;
 
+    /**
+     * Convenient method to add new role to the current user
+     */
+    public void addRole(Role role) {
+        // Check if the roles collection is null
+        if( this.roles == null ) {
+            this.roles = new ArrayList<>();
+        }
+        // Add the passed role to the user roles
+        this.roles.add(role);
+    }
 
 }

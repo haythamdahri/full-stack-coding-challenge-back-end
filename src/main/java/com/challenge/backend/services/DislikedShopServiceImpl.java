@@ -5,6 +5,7 @@ import com.challenge.backend.entities.DislikedShop;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.Collection;
 
 /**
@@ -13,6 +14,7 @@ import java.util.Collection;
  * DislikedShopService interface implementor
  */
 @Service
+@Transactional
 public class DislikedShopServiceImpl implements DislikedShopService {
 
     /***
@@ -22,7 +24,7 @@ public class DislikedShopServiceImpl implements DislikedShopService {
     private DislikedShopRepository dislikedShopRepository;
 
     /**
-     * Save the dislikedShop passed as argument in the database using the dao repository
+     * Save the passed dislikedShop argument in the database using the dao repository
      *
      * @return Shop
      */

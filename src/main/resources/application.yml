@@ -1,3 +1,5 @@
+## Author: HAYTHAM DAHRI
+
 ## Spring DATASOURCE (DataSourceAutoConfiguration & DataSourceProperties)
 spring:
   datasource:
@@ -24,8 +26,17 @@ spring:
       # Max Request Size=215MB
       max-request-size: 215MB
 
+  ## Spring security configuration
   security:
     user:
       name: haytham
       password: toortoor
-## Spring security configuration
+  data:
+
+    ## Rest api configuration
+    rest:
+      base-path: /rest
+
+## jwt security configuration
+jwt:
+  secret: topsecret

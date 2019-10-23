@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
  * Perform some special tasks when built-in rest does not
  */
 @RestController
-@RequestMapping(value = "/rest/")
+@RequestMapping(value = "/rest/v1")
 public class CodingChallengeRestController {
 
     /**

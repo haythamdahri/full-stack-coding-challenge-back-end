@@ -5,6 +5,7 @@ import com.challenge.backend.entities.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.Collection;
 
 /**
@@ -13,6 +14,7 @@ import java.util.Collection;
  * UserService interface implementor
  */
 @Service
+@Transactional
 public class UserServiceImpl implements UserService {
 
     /***
@@ -39,6 +41,16 @@ public class UserServiceImpl implements UserService {
     @Override
     public User getUser(Long id) {
         return this.userRepository.findById(id).orElse(null);
+    }
+
+    /**
+     * Get a user from database based on his email using the dao repository
+     *
+     * @return User or null
+     */
+    @Override
+    public User getUser(String email) {
+        return this.userRepository.findByEmail(email).orElse(null);
     }
 
     /**

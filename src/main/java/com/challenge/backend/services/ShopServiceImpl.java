@@ -5,6 +5,7 @@ import com.challenge.backend.entities.Shop;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.Collection;
 
 /**
@@ -13,9 +14,10 @@ import java.util.Collection;
  * ShopService interface implementor
  */
 @Service
+@Transactional
 public class ShopServiceImpl implements ShopService {
 
-    /***
+    /**
      * Inject a ShopRepository instance
      */
     @Autowired
