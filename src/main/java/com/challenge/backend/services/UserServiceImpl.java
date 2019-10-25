@@ -3,6 +3,7 @@ package com.challenge.backend.services;
 import com.challenge.backend.dao.UserRepository;
 import com.challenge.backend.entities.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -23,6 +24,12 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private UserRepository userRepository;
 
+    /***
+     * Inject a BCryptPasswordEncoder instance
+     */
+    @Autowired
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
+
     /**
      * Save the user passed as argument in the database using the dao repository
      *
@@ -30,6 +37,8 @@ public class UserServiceImpl implements UserService {
      */
     @Override
     public User saveUser(User user) {
+        // Encode user password before persisting
+        user.setPassword(this.bCryptPasswordEncoder.encode(user.getPassword()));
         return this.userRepository.save(user);
     }
 

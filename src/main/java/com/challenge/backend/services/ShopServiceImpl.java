@@ -63,4 +63,14 @@ public class ShopServiceImpl implements ShopService {
     public Collection<Shop> getShops() {
         return this.shopRepository.findAll();
     }
+
+    /**
+     * Get all shops excluding the passed ones as argument from database using the dao repository
+     * Final shops list is ordered by distance
+     * @return Collection of shops
+     */
+    @Override
+    public Collection<Shop> getShops(Collection<Long> excludedIds) {
+        return this.shopRepository.findShopsByIdNotInOrderByDistance(excludedIds);
+    }
 }

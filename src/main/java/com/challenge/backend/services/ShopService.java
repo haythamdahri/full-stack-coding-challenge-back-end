@@ -19,4 +19,6 @@ public interface ShopService {
 
     public Collection<Shop> getShops();
 
+    public Collection<Shop> getShops(Collection<Long> excludedIds);
+
 }

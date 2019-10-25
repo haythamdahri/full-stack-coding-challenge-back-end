@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import javax.transaction.Transactional;
+import javax.validation.constraints.NotEmpty;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -37,12 +38,14 @@ public class User {
      * User username property
      */
     @Column(name = "username")
+    @NotEmpty(message = "username must not be null")
     private String username;
 
     /**
      * User email property
      */
     @Column(name = "email", unique = true, insertable = true, updatable = true, nullable = false, length = 255)
+    @NotEmpty(message = "email must not be null")
     private String email;
 
     /**
@@ -50,6 +53,7 @@ public class User {
      * password never stored in clear text
      */
     @Column(name = "password")
+    @NotEmpty(message = "password must not be null")
     private String password;
 
 
@@ -57,6 +61,7 @@ public class User {
      * User enabled status property
      */
     @Column(name = "enabled")
+    @NotEmpty(message = "enabled must not be null")
     private Boolean enabled;
 
     /**

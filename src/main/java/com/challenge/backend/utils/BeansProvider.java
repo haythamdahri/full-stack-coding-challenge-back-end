@@ -1,19 +1,26 @@
 package com.challenge.backend.utils;
 
+import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import org.springframework.web.filter.CorsFilter;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
+import java.lang.reflect.Array;
+import java.util.Arrays;
+
 /**
  * BeanProvider configuration class to provide beans and other configurations
  */
 @Configuration
-public class BeansProvider {
-
+public class BeansProvider{
 
     /**
      * Method to provide BCryptPasswordEncoder bean instance that will be available for dependency injection (DI) later if needed
@@ -27,7 +34,7 @@ public class BeansProvider {
 
     /**
      * Method to provide WebMvcConfigurer bean instance that will be available for dependency injection (DI) later if needed
-     *
+     * WebMvc configuration
      * @return WebMvcConfigurer
      */
     @Bean
@@ -48,6 +55,4 @@ public class BeansProvider {
 
         };
     }
-
-
 }

@@ -16,6 +16,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -28,6 +29,7 @@ import java.io.FileInputStream;
 @SpringBootApplication
 @Configuration
 @Transactional
+@CrossOrigin(origins = "*")
 public class BackendCodingChallengeApplication implements CommandLineRunner {
 
     /**
@@ -100,5 +102,22 @@ public class BackendCodingChallengeApplication implements CommandLineRunner {
             User user = this.userService.getUser(email);
             System.out.println("Fetched user ==> " + user.getEmail());
         }
+
+        /**
+         // Add shops - Build images bytes
+         String shopsImagesPath = System.getProperty("user.dir") + "/src/main/resources/uploads/shops";
+         // Images
+         byte[] alpha55 = IOUtils.toByteArray(new FileInputStream(new File(shopsImagesPath + "/alpha55.jpg")));
+         byte[] moroccoMall = IOUtils.toByteArray(new FileInputStream(new File(shopsImagesPath + "/morocco-mall.png")));
+         byte[] megaMall = IOUtils.toByteArray(new FileInputStream(new File(shopsImagesPath + "/mega-mall.jpg")));
+         byte[] zara = IOUtils.toByteArray(new FileInputStream(new File(shopsImagesPath + "/zara.jpg")));
+         // Shop objects
+         Arrays.asList(new Shop(null, "Alpha 55", alpha55, 20, null), new Shop(null, "Morocco Mall", moroccoMall, 60, null),
+         new Shop(null, "Mega Mall", megaMall, 80, null), new Shop(null, "ZARA", zara, 2, null))
+         .forEach(shop -> {
+         this.shopService.saveShop(shop);
+         });
+         System.out.println("Shops has been saved successfully");
+         */
     }
 }

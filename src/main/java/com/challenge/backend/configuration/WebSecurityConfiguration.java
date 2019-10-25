@@ -95,11 +95,13 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         // We don't need CSRF in our rest api
-        http.csrf().disable()
+        http.csrf().disable();
+        // Enable cors
+        http.cors().and()
                 // dont authenticate this particular request
                 .authorizeRequests().antMatchers(
                 "/authenticate",
-                "/rest/v1/*"
+                "/rest/users/search/existsByEmail"
         ).permitAll().
                 antMatchers(HttpMethod.OPTIONS, "/**").permitAll().
                 // all other requests need to be authenticated

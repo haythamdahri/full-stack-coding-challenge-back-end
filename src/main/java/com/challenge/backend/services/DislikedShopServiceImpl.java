@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.Collection;
+import java.util.Date;
 
 /**
  * @author HAYTHAM DAHRI
@@ -62,5 +63,15 @@ public class DislikedShopServiceImpl implements DislikedShopService {
     @Override
     public Collection<DislikedShop> getDislikedShops() {
         return this.dislikedShopRepository.findAll();
+    }
+
+    /**
+     * Get passed user argument dislikedShops from database using the dao repository
+     *
+     * @return Collection of dislikedShops
+     */
+    @Override
+    public Collection<DislikedShop> getDislikedShops(Long userId, Date date) {
+        return this.dislikedShopRepository.findByUserIdAndDateBefore(userId, date);
     }
 }

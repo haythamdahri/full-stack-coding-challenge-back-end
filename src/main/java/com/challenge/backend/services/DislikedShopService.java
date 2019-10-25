@@ -3,6 +3,7 @@ package com.challenge.backend.services;
 import com.challenge.backend.entities.DislikedShop;
 
 import java.util.Collection;
+import java.util.Date;
 
 /**
  * @author HAYTHAM DAHRI
@@ -18,5 +19,7 @@ public interface DislikedShopService {
     Boolean deleteDislikedShop(Long id);
 
     public Collection<DislikedShop> getDislikedShops();
+
+    public Collection<DislikedShop> getDislikedShops(Long userId, Date date);
 
 }
