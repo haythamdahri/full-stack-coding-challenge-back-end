@@ -1,6 +1,7 @@
 package com.challenge.backend.dao;
 
 import com.challenge.backend.entities.User;
+import com.sun.org.apache.xpath.internal.operations.Bool;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 import org.springframework.stereotype.Repository;
@@ -23,5 +24,11 @@ public interface UserRepository extends JpaRepository<User, Long> {
      * @return Optional of User
      */
     public Optional<User> findByEmail(String email);
+
+    /**
+     * Method to get a Boolean is a user has the passed email from database
+     * @return Boolean
+     */
+    public Bool existsByEmail(String email);
 
 }
