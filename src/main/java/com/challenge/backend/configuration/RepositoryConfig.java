@@ -13,13 +13,18 @@ import org.springframework.data.rest.webmvc.config.RepositoryRestConfigurerAdapt
  * Main functionality is to configure rest api to expose entities id
  */
 @Configuration
-public class RepositoryConfig extends RepositoryRestConfigurerAdapter {
+public class RepositoryConfig  extends RepositoryRestConfigurerAdapter {
 
     /**
-     * Redefine method to force id as a returned field in rest api
+     * Redefine method
+     * Force id as a returned field in rest api
+     * Allow origins
      */
     @Override
     public void configureRepositoryRestConfiguration(RepositoryRestConfiguration config) {
         config.exposeIdsFor(User.class, Role.class, Shop.class, DislikedShop.class);
+        config.getCorsRegistry().addMapping("/**")
+                .allowedOrigins("http://localhost:4200");
     }
+
 }

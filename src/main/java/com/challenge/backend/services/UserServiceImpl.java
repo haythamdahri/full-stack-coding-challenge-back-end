@@ -15,7 +15,6 @@ import java.util.Collection;
  * UserService interface implementor
  */
 @Service
-@Transactional
 public class UserServiceImpl implements UserService {
 
     /***

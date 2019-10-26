@@ -14,14 +14,13 @@ import java.util.Date;
  * disliked_shops table in database
  * @constraint user_id and shop_id must be unique
  * properties modifier is private
- * default and all args constructors are generated automatically (byte code is auto generated)
+ * default constructor is generated automatically (byte code is auto generated)
  * properties getters and setters are generated automatically (byte code is auto generated)
  */
 @Entity
 @Table(name = "disliked_shops", uniqueConstraints = {@UniqueConstraint(columnNames = {"user_id", "shop_id"})})
 @Data
 @NoArgsConstructor
-@AllArgsConstructor
 public class DislikedShop {
 
     /**
@@ -49,6 +48,7 @@ public class DislikedShop {
     /**
      * date property
      */
+    @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "date")
     private Date date;
 
@@ -57,5 +57,15 @@ public class DislikedShop {
      */
     @Version
     private int version;
+
+    /**
+     * Constructor with custom properties method
+     */
+    public DislikedShop(Long id, User user, Shop shop) {
+        this.id = id;
+        this.user = user;
+        this.shop = shop;
+        this.date = new Date();
+    }
 
 }

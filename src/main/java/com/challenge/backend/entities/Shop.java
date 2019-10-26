@@ -1,5 +1,6 @@
 package com.challenge.backend.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -55,9 +56,11 @@ public class Shop {
      * Annotation @ManyToMany to express relationship between Shop and User
      * a Shop can be preferred by many users
      * a User can have multiple preferred shops
+     * Set JsonIgnore to ignore the list while sending an http response of this object
      * eager fetch to get preferred shops when getting the user from database
      * Set the property mapping
      */
+    @JsonIgnore
     @ManyToMany(mappedBy = "preferredShops", fetch = FetchType.EAGER)
     private Collection<User> users;
 

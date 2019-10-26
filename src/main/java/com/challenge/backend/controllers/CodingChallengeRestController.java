@@ -1,7 +1,9 @@
 package com.challenge.backend.controllers;
 
+import com.challenge.backend.entities.DislikedShop;
 import com.challenge.backend.entities.Shop;
 import com.challenge.backend.entities.User;
+import com.challenge.backend.exceptions.ShopException;
 import com.challenge.backend.services.DislikedShopService;
 import com.challenge.backend.services.ShopService;
 import com.challenge.backend.services.UserService;
@@ -14,10 +16,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
+import javax.transaction.Transactional;
 import java.io.IOException;
 import java.security.Principal;
-import java.util.Collection;
-import java.util.Date;
+import java.util.*;
 
 /**
  * Main application rest controller
@@ -26,7 +28,6 @@ import java.util.Date;
  */
 @RestController
 @RequestMapping(value = "/rest/v1")
-@CrossOrigin("*")
 public class CodingChallengeRestController {
 
     /**
@@ -71,6 +72,7 @@ public class CodingChallengeRestController {
 
     /**
      * Save a user rest end point
+     * @return User
      */
     @RequestMapping(value = "/save-user", method = RequestMethod.POST)
     public User saveUser(@RequestBody User user) {
@@ -80,26 +82,29 @@ public class CodingChallengeRestController {
 
     /**
      * Get user shops
+     * @return Collection of shops
      */
     @RequestMapping(value = "/near-by-shops", method = RequestMethod.GET)
-    public Collection<Shop> getNearByShops(Principal principal) {
+    public Collection<Shop> getNearByShops(@RequestParam(name = "search", required = false) String search, Principal principal) {
         // Retrieve connected user from database
         User user = this.userUtility.getAuthenticatedUser();
-        // Retrieve allowed shops to be sent to the connected user
-        Collection<Shop> shops = this.shopService.getShops();
-        // Exclude preferred and disliked shops less than two hours
-        this.dislikedShopService.getDislikedShops(user.getId(), new Date()).forEach(dislikedShop -> {
-            shops.remove(dislikedShop.getShop());
-        });
-        shops.removeAll(user.getPreferredShops());
-        // return the results
+        // Create shop collection
+        Collection<Shop> shops = new ArrayList<>();
+        // Check searching criteria
+        if( search == null ) {
+            shops = this.shopService.getUserNearShops(user.getId());
+        } else {
+            shops = this.shopService.getCustomUserNearShops(user.getId(), search);
+        }
+        // return shops
         return shops;
     }
 
     /**
      * Get a shop image
+     * @return ResponseEntity
      */
-    @GetMapping("/shop/image/{id}")
+    @RequestMapping(value = "/shop/image/{id}")
     public ResponseEntity<byte[]> showProductImage(@PathVariable(value = "id", required = true) Long id, HttpServletResponse response) throws IOException {
         Shop shop = this.shopService.getShop(id);
         HttpHeaders headers = new HttpHeaders();
@@ -107,4 +112,83 @@ public class CodingChallengeRestController {
         return new ResponseEntity<>(shop.getImage(), headers, HttpStatus.OK);
     }
 
+    /**
+     * Add a shop to the current user preferred shops
+     * @return ResponseEntity
+     */
+    @RequestMapping(value = "/add-user-shop/{id}", method = RequestMethod.POST)
+    @Transactional
+    public ResponseEntity<Object> addShopToUserPreferredShop(@PathVariable(value = "id", required = true) Long shopId) {
+        // Create response object content
+        Map<Object, Object> data = new HashMap<>();
+        // Perform business logic
+        try {
+            // Retrieve connected user
+            User user = this.userUtility.getAuthenticatedUser();
+            // Retrieve the shop
+            Shop shop = this.shopService.getShop(shopId);
+            // Check if shop exists to throw a new exception
+            if( shop == null ) {
+                throw new ShopException("No shops has been found with id " + shopId);
+            }
+            // Add the shop to the user preferred shops
+            user.addPreferredShop(shop);
+            // Save the user using the user service
+            this.userService.saveUser(user);
+            // Put success message and status
+            data.put("status", true);
+            data.put("message", "Shop has been added to your preferences successfully");
+        }
+        catch(ShopException ex) {
+            System.out.println(ex.getMessage());
+            data.put("status", false);
+            data.put("message", ex.getMessage());
+        }
+        catch(Exception ex) {
+            System.out.println(ex.getMessage());
+            data.put("status", false);
+            data.put("message", "An error occurred, please try again!");
+        }
+        // Return response
+        return new ResponseEntity<Object>(data, HttpStatus.OK);
+    }
+
+    /**
+     * Add a shop to the current user disliked shops
+     * @return ResponseEntity
+     */
+    @RequestMapping(value = "/dislike-shop/{id}", method = RequestMethod.POST)
+    @Transactional
+    public ResponseEntity<Object> addShopDislikedShop(@PathVariable(value = "id", required = true) Long shopId) {
+        // Create response object content
+        Map<Object, Object> data = new HashMap<>();
+        // Perform business logic
+        try {
+            // Retrieve connected user
+            User user = this.userUtility.getAuthenticatedUser();
+            // Retrieve the shop
+            Shop shop = this.shopService.getShop(shopId);
+            // Check if shop exists to throw a new exception
+            if( shop == null ) {
+                throw new ShopException("No shops has been found with id " + shopId);
+            }
+            // Create a disliked shop object and save it
+            DislikedShop dislikedShop = this.dislikedShopService.saveOrUpdate(user.getId(), shop.getId());
+            // Put success message and status
+            data.put("status", true);
+            data.put("message", "Shop has been disliked successfully");
+        }
+        catch(ShopException ex) {
+            System.out.println(ex.getMessage());
+            data.put("status", false);
+            data.put("message", ex.getMessage());
+        }
+        catch(Exception ex) {
+            System.out.println(ex.getMessage());
+            data.put("status", false);
+            data.put("message", "An error occurred, please try again!");
+        }
+        // Return response
+        return new ResponseEntity<Object>(data, HttpStatus.OK);
+    }
 }

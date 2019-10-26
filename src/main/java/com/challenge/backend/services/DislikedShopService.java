@@ -1,6 +1,8 @@
 package com.challenge.backend.services;
 
 import com.challenge.backend.entities.DislikedShop;
+import com.challenge.backend.entities.Shop;
+import com.challenge.backend.entities.User;
 
 import java.util.Collection;
 import java.util.Date;
@@ -13,6 +15,8 @@ import java.util.Date;
 public interface DislikedShopService {
 
     DislikedShop saveDislikedShop(DislikedShop dislikedShop);
+
+    DislikedShop saveOrUpdate(Long userId, Long shopId);
 
     DislikedShop getDislikedShop(Long id);
 

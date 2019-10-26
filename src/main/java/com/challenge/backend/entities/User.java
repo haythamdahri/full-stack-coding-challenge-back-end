@@ -61,8 +61,7 @@ public class User {
      * User enabled status property
      */
     @Column(name = "enabled")
-    @NotEmpty(message = "enabled must not be null")
-    private Boolean enabled;
+    private boolean enabled;
 
     /**
      * collection of roles
@@ -98,4 +97,15 @@ public class User {
         this.roles.add(role);
     }
 
+    /**
+     * Convenient method to add a shop to the current user preferred shops
+     */
+    public void addPreferredShop(Shop shop) {
+        // Check if the preferredShops collection is null
+        if( this.preferredShops == null ) {
+            this.preferredShops = new ArrayList<>();
+        }
+        // Add the passed shop to the user preferred shops
+        this.preferredShops.add(shop);
+    }
 }

@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.*;
  * JWT authentication controller to handle user identifier
  */
 @RestController
-@CrossOrigin("*")
 public class JwtAuthenticationController {
 
     /**

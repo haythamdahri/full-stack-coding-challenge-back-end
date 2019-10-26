@@ -2,6 +2,8 @@ package com.challenge.backend.services;
 
 import com.challenge.backend.dao.DislikedShopRepository;
 import com.challenge.backend.entities.DislikedShop;
+import com.challenge.backend.entities.Shop;
+import com.challenge.backend.entities.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,7 +17,6 @@ import java.util.Date;
  * DislikedShopService interface implementor
  */
 @Service
-@Transactional
 public class DislikedShopServiceImpl implements DislikedShopService {
 
     /***
@@ -23,6 +24,18 @@ public class DislikedShopServiceImpl implements DislikedShopService {
      */
     @Autowired
     private DislikedShopRepository dislikedShopRepository;
+
+    /***
+     * Inject a UserService instance
+     */
+    @Autowired
+    private UserService userService;
+
+    /***
+     * Inject a ShopService instance
+     */
+    @Autowired
+    private ShopService shopService;
 
     /**
      * Save the passed dislikedShop argument in the database using the dao repository
@@ -32,6 +45,29 @@ public class DislikedShopServiceImpl implements DislikedShopService {
     @Override
     public DislikedShop saveDislikedShop(DislikedShop dislikedShop) {
         return this.dislikedShopRepository.save(dislikedShop);
+    }
+
+    /**
+     * Save or update a dislikedShop object in the database using the dao repository
+     *
+     * @return Shop
+     */
+    @Override
+    public DislikedShop saveOrUpdate(Long userId, Long shopId){
+        try {
+            // Check if an object with the passed user and shop already exists or not
+            DislikedShop dislikedShop = this.dislikedShopRepository.findByUserIdAndShopId(userId, shopId);
+            if (dislikedShop != null) {
+                dislikedShop.setDate(new Date());
+            } else {
+                dislikedShop = new DislikedShop(null, this.userService.getUser(userId), this.shopService.getShop(shopId));
+            }
+            // Save and return the disliked shop object
+            return this.dislikedShopRepository.save(dislikedShop);
+        }
+        catch(Exception ex) {
+            return null;
+        }
     }
 
     /**
@@ -72,6 +108,6 @@ public class DislikedShopServiceImpl implements DislikedShopService {
      */
     @Override
     public Collection<DislikedShop> getDislikedShops(Long userId, Date date) {
-        return this.dislikedShopRepository.findByUserIdAndDateBefore(userId, date);
+        return this.dislikedShopRepository.findUserNewDislikedShops(userId, date);
     }
 }

@@ -17,8 +17,6 @@ import java.util.Optional;
  */
 @Repository
 @RepositoryRestResource
-@Transactional
-@CrossOrigin(value = "*")
 public interface RoleRepository extends JpaRepository<Role, Long> {
 
     /**

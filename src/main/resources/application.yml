@@ -40,3 +40,4 @@ spring:
 ## jwt security configuration
 jwt:
   secret: topsecret
+

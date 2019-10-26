@@ -19,7 +19,6 @@ import java.util.Set;
  * ShopService interface implementor
  */
 @Service
-@Transactional
 public class UserDetailsServiceImpl implements UserDetailsService {
 
     /**
@@ -33,6 +32,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
      *
      * @return UserDetails
      */
+    @Transactional
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
 

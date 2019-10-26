@@ -101,7 +101,9 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 // dont authenticate this particular request
                 .authorizeRequests().antMatchers(
                 "/authenticate",
-                "/rest/users/search/existsByEmail"
+                "/rest/users/search/existsByEmail",
+                "/rest/v1/save-user",
+                "/rest/v1/shop/image/*"
         ).permitAll().
                 antMatchers(HttpMethod.OPTIONS, "/**").permitAll().
                 // all other requests need to be authenticated

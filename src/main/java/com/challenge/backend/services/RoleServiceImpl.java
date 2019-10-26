@@ -15,7 +15,6 @@ import java.util.Collection;
  * RoleService interface implementor
  */
 @Service
-@Transactional
 public class RoleServiceImpl implements RoleService {
 
     /***

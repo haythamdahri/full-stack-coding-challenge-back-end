@@ -19,6 +19,7 @@ public interface ShopService {
 
     public Collection<Shop> getShops();
 
-    public Collection<Shop> getShops(Collection<Long> excludedIds);
+    public Collection<Shop> getUserNearShops(Long userId);
 
+    public Collection<Shop> getCustomUserNearShops(Long userId, String search);
 }
