@@ -108,4 +108,14 @@ public class User {
         // Add the passed shop to the user preferred shops
         this.preferredShops.add(shop);
     }
+
+    /**
+     * Convenient method to remove a shop from the current user preferred shops
+     */
+    public void removePreferredShop(Shop shop) {
+        // Check if the preferredShops collection is not null before removing
+        if( this.preferredShops != null ) {
+            this.preferredShops.remove(shop);
+        }
+    }
 }

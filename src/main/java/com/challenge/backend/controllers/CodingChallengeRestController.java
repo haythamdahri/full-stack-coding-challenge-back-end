@@ -81,22 +81,36 @@ public class CodingChallengeRestController {
     }
 
     /**
-     * Get user shops
+     * Get user near shops
      * @return Collection of shops
      */
     @RequestMapping(value = "/near-by-shops", method = RequestMethod.GET)
     public Collection<Shop> getNearByShops(@RequestParam(name = "search", required = false) String search, Principal principal) {
-        // Retrieve connected user from database
-        User user = this.userUtility.getAuthenticatedUser();
+        // Retrieve connected user id from database
+        Long userId = this.userUtility.getAuthenticatedUser().getId();
         // Create shop collection
         Collection<Shop> shops = new ArrayList<>();
         // Check searching criteria
         if( search == null ) {
-            shops = this.shopService.getUserNearShops(user.getId());
+            shops = this.shopService.getUserNearShops(userId);
         } else {
-            shops = this.shopService.getCustomUserNearShops(user.getId(), search);
+            shops = this.shopService.getCustomUserNearShops(userId, search);
         }
         // return shops
+        return shops;
+    }
+
+    /**
+     * Get user preferred shops
+     * @return Collection of shops
+     */
+    @RequestMapping(value = "/user-preferred-shops", method = RequestMethod.GET)
+    public Collection<Shop> getUserPreferredShops() {
+        // Retrieve connected user from database
+        User user = this.userUtility.getAuthenticatedUser();
+        // Create preferred shops collection
+        Collection<Shop> shops = user.getPreferredShops();
+        // Return user preferred shops
         return shops;
     }
 
@@ -177,6 +191,46 @@ public class CodingChallengeRestController {
             // Put success message and status
             data.put("status", true);
             data.put("message", "Shop has been disliked successfully");
+        }
+        catch(ShopException ex) {
+            System.out.println(ex.getMessage());
+            data.put("status", false);
+            data.put("message", ex.getMessage());
+        }
+        catch(Exception ex) {
+            System.out.println(ex.getMessage());
+            data.put("status", false);
+            data.put("message", "An error occurred, please try again!");
+        }
+        // Return response
+        return new ResponseEntity<Object>(data, HttpStatus.OK);
+    }
+
+
+    /**
+     * Add a shop to the current user preferred shops
+     * @return ResponseEntity
+     */
+    @RequestMapping(value = "/remove-preferred-shop/{id}", method = RequestMethod.POST)
+    @Transactional
+    public ResponseEntity<Object> removeShopFromPreferredShops(@PathVariable(value = "id", required = true) Long shopId) {
+        // Create response object content
+        Map<Object, Object> data = new HashMap<>();
+        // Perform business logic
+        try {
+            // Retrieve connected user
+            User user = this.userUtility.getAuthenticatedUser();
+            // Retrieve the shop
+            Shop shop = this.shopService.getShop(shopId);
+            // Check if shop exists to throw a new exception
+            if( shop == null ) {
+                throw new ShopException("No shops has been found with id " + shopId);
+            }
+            // Remove shop from user preferred shops list
+            user.removePreferredShop(shop);
+            // Put success message and status
+            data.put("status", true);
+            data.put("message", "Shop has been remove from your preferences successfully");
         }
         catch(ShopException ex) {
             System.out.println(ex.getMessage());

@@ -36,6 +36,8 @@ public class UserServiceImpl implements UserService {
      */
     @Override
     public User saveUser(User user) {
+        // Enable user account
+        user.setEnabled(true);
         // Encode user password before persisting
         user.setPassword(this.bCryptPasswordEncoder.encode(user.getPassword()));
         return this.userRepository.save(user);

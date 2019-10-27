@@ -35,7 +35,6 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     @Transactional
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-
         // Fetch user from database using his email
         User user = this.userService.getUser(email);
         Set<GrantedAuthority> grantedAuthorities = new HashSet<>();
