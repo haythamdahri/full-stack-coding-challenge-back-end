@@ -17,9 +17,9 @@ public interface ShopService {
 
     Boolean deleteShop(Long id);
 
-    public Collection<Shop> getShops();
+    Collection<Shop> getShops();
 
-    public Collection<Shop> getUserNearShops(Long userId);
+    Collection<Shop> getUserNearShops(Long userId);
 
-    public Collection<Shop> getCustomUserNearShops(Long userId, String search);
+    Collection<Shop> getCustomUserNearShops(Long userId, String search);
 }

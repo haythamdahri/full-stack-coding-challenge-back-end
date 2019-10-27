@@ -14,6 +14,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.web.bind.annotation.*;
 
 /**
+ * @author HAYTHAM DAHRI
  * JWT authentication controller to handle user identifier
  */
 @RestController

@@ -1,8 +1,6 @@
 package com.challenge.backend.services;
 
 import com.challenge.backend.entities.DislikedShop;
-import com.challenge.backend.entities.Shop;
-import com.challenge.backend.entities.User;
 
 import java.util.Collection;
 import java.util.Date;
@@ -22,8 +20,8 @@ public interface DislikedShopService {
 
     Boolean deleteDislikedShop(Long id);
 
-    public Collection<DislikedShop> getDislikedShops();
+    Collection<DislikedShop> getDislikedShops();
 
-    public Collection<DislikedShop> getDislikedShops(Long userId, Date date);
+    Collection<DislikedShop> getDislikedShops(Long userId, Date date);
 
 }

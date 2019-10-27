@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import java.io.Serializable;
 
 /**
+ * @author HAYTHAM DAHRI
  * JWTRequest model class to handle sent data from the user
  * properties modifier is private
  * default and all args constructors are generated automatically (byte code is auto generated)

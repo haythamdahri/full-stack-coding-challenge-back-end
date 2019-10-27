@@ -9,6 +9,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 
 /**
+ * @author HAYTHAM DAHRI
  * UserUtility component class
  */
 @Component

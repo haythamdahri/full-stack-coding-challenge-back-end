@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
+ * @author HAYTHAM DAHRI
  * Filter component class to set necessary configuration for front applications
  */
 @Component

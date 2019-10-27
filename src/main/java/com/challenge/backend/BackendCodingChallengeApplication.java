@@ -1,14 +1,9 @@
 package com.challenge.backend;
 
-import com.challenge.backend.entities.Role;
-import com.challenge.backend.entities.RoleEnum;
-import com.challenge.backend.entities.Shop;
-import com.challenge.backend.entities.User;
 import com.challenge.backend.services.DislikedShopService;
 import com.challenge.backend.services.RoleService;
 import com.challenge.backend.services.ShopService;
 import com.challenge.backend.services.UserService;
-import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -18,13 +13,9 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.CrossOrigin;
 
-import java.io.File;
-import java.io.FileInputStream;
-
 /**
- * Entry point for this project.
- *
  * @author HAYTHAM DAHRI
+ * Entry point for this project.
  */
 @SpringBootApplication
 @Configuration

@@ -19,6 +19,6 @@ public interface UserService {
 
     Boolean deleteUser(Long id);
 
-    public Collection<User> getUsers();
+    Collection<User> getUsers();
 
 }

@@ -2,12 +2,9 @@ package com.challenge.backend.services;
 
 import com.challenge.backend.dao.DislikedShopRepository;
 import com.challenge.backend.entities.DislikedShop;
-import com.challenge.backend.entities.Shop;
-import com.challenge.backend.entities.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.transaction.Transactional;
 import java.util.Collection;
 import java.util.Date;
 

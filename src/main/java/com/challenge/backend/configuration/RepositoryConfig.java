@@ -9,6 +9,7 @@ import org.springframework.data.rest.core.config.RepositoryRestConfiguration;
 import org.springframework.data.rest.webmvc.config.RepositoryRestConfigurerAdapter;
 
 /**
+ * @author HAYTHAM DAHRI
  * Rest Repository configuration class that extends RepositoryRestConfigurerAdapter
  * Main functionality is to configure rest api to expose entities id
  */

@@ -1,9 +1,9 @@
 package com.challenge.backend.exceptions;
 
-import com.challenge.backend.entities.Shop;
 import lombok.Data;
 
 /**
+ * @author HAYTHAM DAHRI
  * Shop exception class
  */
 @Data

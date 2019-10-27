@@ -1,13 +1,11 @@
 package com.challenge.backend.models;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 
 /**
+ * @author HAYTHAM DAHRI
  * JwtResponse model class to send wrap sent data to the user
  * properties modifier is private
  * default and all args constructors are generated automatically (byte code is auto generated)

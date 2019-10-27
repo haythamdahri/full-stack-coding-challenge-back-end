@@ -19,9 +19,13 @@ import javax.servlet.http.HttpServletResponse;
 import javax.transaction.Transactional;
 import java.io.IOException;
 import java.security.Principal;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
+ * @author HAYTHAM DAHRI
  * Main application rest controller
  * Perform some special tasks when built-in rest does not
  * CrossOrigin all to allow front-end application to access to repository from an other domain
