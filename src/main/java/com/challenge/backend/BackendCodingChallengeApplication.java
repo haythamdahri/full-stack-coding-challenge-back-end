@@ -71,7 +71,7 @@ public class BackendCodingChallengeApplication implements CommandLineRunner {
      */
     @Override
     public void run(String... args) throws Exception {
-        // Email to be used for persisting and fetching
+       /** // Email to be used for persisting and fetching
         String email = "haytham.dahri@gmail.com";
 
         // Adding roles if not existed
@@ -101,7 +101,7 @@ public class BackendCodingChallengeApplication implements CommandLineRunner {
             // fetch user and display him
             User user = this.userService.getUser(email);
             System.out.println("Fetched user ==> " + user.getEmail());
-        }
+        }*/
 
         /**
          // Add shops - Build images bytes

@@ -102,6 +102,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .authorizeRequests().antMatchers(
                 "/authenticate",
                 "/rest/users/search/existsByEmail",
+                "/rest/v1/",
                 "/rest/v1/save-user",
                 "/rest/v1/shop/image/*"
         ).permitAll().

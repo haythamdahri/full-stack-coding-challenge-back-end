@@ -3,6 +3,7 @@ package com.challenge.backend.entities;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import javax.persistence.*;
 import javax.transaction.Transactional;
@@ -69,7 +70,9 @@ public class User {
      * a User can have multiple roles
      * a Role can be affected to many users
      * eager fetch to get preferred shops when getting the user from database
+     * Exclude the field from toString method
      */
+    @ToString.Exclude
     @ManyToMany
     @JoinTable(name = "users_roles", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Collection<Role> roles;
