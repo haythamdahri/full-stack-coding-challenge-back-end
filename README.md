@@ -106,3 +106,12 @@ The specified end point are specified and required to be consumed by a client [f
 
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
+If any modifications or unsatisfy requirements, please contact me.
+
+## Author
+ - HAYTHAM DAHRI
+
+[Linkedin](https://www.linkedin.com/in/haytham-dahri/) - [Github](https://github.com/haythamdahri) - [Facebook](https://www.facebook.com/Haytham.dahri)
+
+***
+Thank you for taking time to read the documentation. :+1:
