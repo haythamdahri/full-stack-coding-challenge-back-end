@@ -13,6 +13,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
@@ -67,6 +68,14 @@ public class CodingChallengeRestController {
     private UserUtility userUtility;
 
     /**
+     * BCryptPasswordEncoder property
+     * Inject an instance from servlet container
+     * Performing Dependency Injection
+     */
+    @Autowired
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
+
+    /**
      * Home page rest end point
      */
     @RequestMapping(value = "/")
@@ -80,6 +89,10 @@ public class CodingChallengeRestController {
      */
     @RequestMapping(value = "/save-user", method = RequestMethod.POST)
     public User saveUser(@RequestBody User user) {
+        // Enable user account
+        user.setEnabled(true);
+        // Encode user password before persisting
+        user.setPassword(this.bCryptPasswordEncoder.encode(user.getPassword()));
         // Save user in database
         return this.userService.saveUser(user);
     }
