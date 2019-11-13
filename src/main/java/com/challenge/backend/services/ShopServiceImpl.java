@@ -91,7 +91,8 @@ public class ShopServiceImpl implements ShopService {
         // Retrieve user preferred shops id list
         Collection<Long> preferredShopsIds = user.getPreferredShops().stream().map(Shop::getId).collect(Collectors.toList());
         // Retrieve user new disliked shops ids that were added in the last two hours
-        Collection<DislikedShop> dislikedShops = this.dislikedShopService.getDislikedShops(userId, DateUtils.addHours(new Date(), 2));
+        Collection<DislikedShop> dislikedShops = this.dislikedShopService.getDislikedShops(userId);
+        System.out.println(dislikedShops);
         Collection<Long> dislikedShopsIds = dislikedShops.stream()
                 .map(DislikedShop::getShop).collect(Collectors.toList()).stream().map(Shop::getId).collect(Collectors.toList());
         // Check if any list is empty to avoid sql exception while executing HQL queries in the repository class
@@ -120,7 +121,7 @@ public class ShopServiceImpl implements ShopService {
         // Retrieve user preferred shops id list
         Collection<Long> preferredShopsIds = user.getPreferredShops().stream().map(Shop::getId).collect(Collectors.toList());
         // Retrieve user new disliked shops ids that were added in the last two hours
-        Collection<DislikedShop> dislikedShops = this.dislikedShopService.getDislikedShops(userId, DateUtils.addHours(new Date(), 2));
+        Collection<DislikedShop> dislikedShops = this.dislikedShopService.getDislikedShops(userId);
         Collection<Long> dislikedShopsIds = dislikedShops.stream()
                 .map(DislikedShop::getShop).collect(Collectors.toList()).stream().map(Shop::getId).collect(Collectors.toList());
         // Check if any list is empty to avoid sql exception while executing HQL queries in the repository class

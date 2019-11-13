@@ -104,7 +104,7 @@ public class DislikedShopServiceImpl implements DislikedShopService {
      * @return Collection of dislikedShops
      */
     @Override
-    public Collection<DislikedShop> getDislikedShops(Long userId, Date date) {
-        return this.dislikedShopRepository.findUserNewDislikedShops(userId, date);
+    public Collection<DislikedShop> getDislikedShops(Long userId) {
+        return this.dislikedShopRepository.findUserNewDislikedShops(userId);
     }
 }

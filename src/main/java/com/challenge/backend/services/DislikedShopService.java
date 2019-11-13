@@ -22,6 +22,6 @@ public interface DislikedShopService {
 
     Collection<DislikedShop> getDislikedShops();
 
-    Collection<DislikedShop> getDislikedShops(Long userId, Date date);
+    Collection<DislikedShop> getDislikedShops(Long userId);
 
 }
